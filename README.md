@@ -1,16 +1,17 @@
-## Hi there 👋
+### Hi there, I'm Saket! 👋
 
-<!--
-**Saket745/Saket745** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I'm a Data Engineering student and Tech Creator based in Mumbai. I love breaking down complex tech (like AI & Robotics) and building practical ML projects.
 
-Here are some ideas to get you started:
+- 🔭 **I’m currently working on:** Heart Rate Detection using Computer Vision & PyTorch.
+- 📚 **I’m currently learning:** Digital Image Processing & GATE DA Syllabus.
+- 🚀 **Creator of:** [xenhub](https://instagram.com/xenhub) (Futuristic Tech & AI).
+- ⚡ **Fun fact:** I treat skincare like a debugging process!
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### 🛠️ Languages & Tools
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+
+### 📫 Connect with me
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saket-maurya-de/)
