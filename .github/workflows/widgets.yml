@@ -7,6 +7,10 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: saket745-profile-widgets
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -41,7 +45,9 @@ jobs:
           git add assets/widgets
           if git diff --cached --quiet; then
             echo "No widget changes to publish."
-          else
-            git commit -m "chore: refresh profile glass widgets"
-            git push
+            exit 0
           fi
+          git commit -m "chore: refresh profile glass widgets"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
