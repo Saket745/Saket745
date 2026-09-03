@@ -57,36 +57,21 @@
 
 ---
 
-## ◈ GLASSMORPHIC PROFILE DASHBOARD
+## ◈ LIVE GITHUB COMMAND CENTER
 
-<p align="center">
-  <a href="https://Saket745.github.io/Saket745/">
-    <img src="https://capsule-render.vercel.app/api?type=rect&height=90&text=OPEN%20LIVE%20GITHUB%20DASHBOARD%20↗&fontSize=25&fontColor=ffffff&color=0:0b1220,45:182b5a,100:4c1d95&stroke=48c5ff&strokeWidth=1" alt="Open live GitHub dashboard"/>
-  </a>
-</p>
+<div align="center">
 
-<p align="center">
-  <strong>Interactive • event-driven • auto-refreshing</strong><br/>
-  <sub>Commits, pull requests, issues, repositories, stars, forks, languages and activity are rendered dynamically from GitHub's public APIs.</sub>
-</p>
+### [`OPEN THE INTERACTIVE DASHBOARD ↗`](https://Saket745.github.io/Saket745/)
 
-<p align="center">
-  <img src="./assets/widgets/top-languages.svg" alt="Saket745 top languages" width="630" />
-</p>
+**Real data · dynamic UI · automatic refresh**
 
-<p align="center">
-  <img src="./assets/widgets/tech-stack.svg" alt="Saket745 technology stack" width="630" />
-</p>
+</div>
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/widgets/github-snake-glass-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/widgets/github-snake-glass.svg">
-    <img src="./assets/widgets/github-snake-glass.svg" alt="Saket745 GitHub contribution snake" width="900" />
-  </picture>
-</p>
+The dashboard is an actual web application—not a generated screenshot. It reads your public GitHub profile, repositories and activity through GitHub's public APIs and redraws the interface when new activity becomes visible.
 
-> **Live dashboard:** open the interactive dashboard above for continuously refreshed GitHub activity. The decorative images below remain as the profile's visual showcase.
+It watches for activity such as **commits, pull requests, issues, repository creation, forks, stars, reviews and releases**, then refreshes the relevant panels without rebuilding a dashboard image.
+
+> **Note:** GitHub's public Events API is designed for polling and GitHub documents that event visibility can have variable latency. The dashboard therefore reports its synchronization state honestly rather than claiming instantaneous delivery. citeturn302259search0turn302259search1
 
 ---
 
@@ -136,6 +121,6 @@ SHIP       → turn experiments into usable software
 
 ### `BUILD → EXPERIMENT → LEARN → SHIP`
 
-<sub>Profile widgets are generated from this repository and refreshed by GitHub Actions.</sub>
+<sub>The live command center is deployed separately through GitHub Pages.</sub>
 
 </div>
