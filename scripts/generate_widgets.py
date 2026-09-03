@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import json, os, pathlib
+
+import json
+import os
+import pathlib
 from collections import Counter
+from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -14,7 +18,7 @@ DEFAULT_STACK = [
     ("Python", "AI / Automation"), ("C++", "DSA / Systems"),
     ("React", "Frontend"), ("FastAPI", "Backend"),
     ("PyTorch", "Deep Learning"), ("OpenCV", "Computer Vision"),
-    ("Git", "Version Control"), ("GitHub Actions", "Automation")
+    ("Git", "Version Control"), ("GitHub Actions", "Automation"),
 ]
 
 
@@ -30,8 +34,25 @@ def api(url: str):
         return json.load(r)
 
 
+def graphql(query: str, variables: dict):
+    payload = json.dumps({"query": query, "variables": variables}).encode("utf-8")
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "Saket745-glass-profile",
+    }
+    if TOKEN:
+        headers["Authorization"] = f"Bearer {TOKEN}"
+    with urlopen(Request("https://api.github.com/graphql", data=payload, headers=headers, method="POST"), timeout=25) as r:
+        data = json.load(r)
+    if data.get("errors"):
+        raise RuntimeError(str(data["errors"]))
+    return data["data"]
+
+
 def esc(s: str) -> str:
-    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    return (str(s).replace("&", "&amp;").replace("<", "&lt;")
+            .replace(">", "&gt;").replace('"', "&quot;"))
 
 
 def frame(title: str, subtitle: str, body: str, width=630, height=350) -> str:
@@ -116,8 +137,81 @@ def make_stack():
     (OUT / "tech-stack.svg").write_text(frame("TECH STACK", "A modular glass panel for your builder toolkit", body), encoding="utf-8")
 
 
+def make_profile_stats():
+    """Build a live, repo-local summary from GitHub REST + GraphQL public data."""
+    query = '''
+    query($login:String!) {
+      user(login:$login) {
+        login
+        name
+        followers { totalCount }
+        following { totalCount }
+        repositories(ownerAffiliations: OWNER, privacy: PUBLIC, first: 100) {
+          totalCount
+          nodes { name stargazerCount forkCount isArchived }
+        }
+        contributionsCollection {
+          totalCommitContributions
+          totalIssueContributions
+          totalPullRequestContributions
+          totalPullRequestReviewContributions
+          restrictedContributionsCount
+          contributionCalendar { totalContributions }
+        }
+      }
+    }
+    '''
+    try:
+        u = graphql(query, {"login": USER})["user"]
+        repos = [r for r in u["repositories"]["nodes"] if not r["isArchived"]]
+        stars = sum(r["stargazerCount"] for r in repos)
+        forks = sum(r["forkCount"] for r in repos)
+        c = u["contributionsCollection"]
+        contributions = c["contributionCalendar"]["totalContributions"]
+        commits = c["totalCommitContributions"]
+        prs = c["totalPullRequestContributions"]
+        issues = c["totalIssueContributions"]
+        reviews = c["totalPullRequestReviewContributions"]
+        restricted = c["restrictedContributionsCount"]
+        public_repos = u["repositories"]["totalCount"]
+        followers = u["followers"]["totalCount"]
+        following = u["following"]["totalCount"]
+    except Exception as e:
+        print(f"Profile GraphQL unavailable: {e}")
+        return
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+    tiles = [
+        ("REPOS", public_repos, "public repositories", "#48c5ff"),
+        ("FOLLOWERS", followers, "people following", "#a875ff"),
+        ("FOLLOWING", following, "profiles followed", "#42dfcf"),
+        ("STARS", stars, "stars received", "#ffc15b"),
+        ("FORKS", forks, "repository forks", "#ff6fae"),
+        ("YEARLY CONTRIBUTIONS", contributions, "visible contribution events", "#77a7ff"),
+    ]
+    cards = []
+    positions = [(34,90),(244,90),(454,90),(34,184),(244,184),(454,184)]
+    for (title, value, label, accent), (x, y) in zip(tiles, positions):
+        cards.append(f'''<g transform="translate({x},{y})">
+ <rect width="176" height="76" rx="18" fill="#101c2f" fill-opacity=".84" stroke="#5d7ca9" stroke-opacity=".34"/>
+ <circle cx="22" cy="23" r="8" fill="{accent}" opacity=".85" filter="url(#glow)"/>
+ <text x="38" y="27" fill="#a9bddc" font-family="Segoe UI,Arial" font-size="9.2" font-weight="700" letter-spacing=".7">{esc(title)}</text>
+ <text x="16" y="55" fill="#f5f9ff" font-family="Segoe UI,Arial" font-size="20" font-weight="750">{esc(value)}</text>
+ <text x="98" y="55" fill="#7087aa" font-family="Segoe UI,Arial" font-size="8.6">{esc(label)}</text></g>''')
+    detail = f"commits {commits} • PRs {prs} • issues {issues} • reviews {reviews} • private/restricted {restricted}"
+    body = "".join(cards)
+    body += f'<text x="34" y="303" fill="#91a7ca" font-family="Segoe UI,Arial" font-size="9.5">{esc(detail)}</text>'
+    body += f'<text x="596" y="326" text-anchor="end" fill="#6680a8" font-family="Segoe UI,Arial" font-size="10.5">{esc(USER)} • synchronized {esc(now)}</text>'
+    (OUT / "profile-stats.svg").write_text(
+        frame("PROFILE TELEMETRY", "Live public GitHub account + contribution signals", body),
+        encoding="utf-8",
+    )
+
+
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     make_languages()
     make_stack()
+    make_profile_stats()
     print(f"Generated glass widgets for {USER}")
