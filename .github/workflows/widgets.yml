@@ -6,6 +6,8 @@ on:
     - cron: "17 2 * * *"
   push:
     branches: [main]
+    paths-ignore:
+      - "assets/widgets/**"
 
 concurrency:
   group: saket745-profile-widgets
@@ -20,6 +22,8 @@ jobs:
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Generate live glass widgets
         env:
@@ -32,13 +36,15 @@ jobs:
         with:
           github_user_name: Saket745
           outputs: |
-            assets/widgets/github-snake.svg?color_snake=%2348c5ff&color_dots=%23121c30,%231b2b49,%234a58bf,%237d5ae8,%23b982ff
+            assets/widgets/github-snake.svg?color_snake=%2348c5ff&color_dots=%230f1a2b,%2318273f,%23374aa3,%235a49c6,%238c64e8
             assets/widgets/github-snake-dark.svg?palette=github-dark&color_snake=%23b982ff
 
       - name: Wrap snake in matching glass panel
         run: python3 scripts/wrap_snake.py
 
       - name: Publish refreshed widget assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -48,6 +54,4 @@ jobs:
             exit 0
           fi
           git commit -m "chore: refresh profile glass widgets"
-          git fetch origin main
-          git rebase origin/main
           git push origin HEAD:main
