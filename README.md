@@ -59,19 +59,11 @@
 
 ## ◈ LIVE GITHUB COMMAND CENTER
 
-<div align="center">
+<p align="center">
+  <img src="./assets/widgets/profile-dashboard.svg" alt="Saket745 live GitHub telemetry dashboard" width="1000" />
+</p>
 
-### [`OPEN THE INTERACTIVE DASHBOARD ↗`](https://Saket745.github.io/Saket745/)
-
-**Real data · dynamic UI · automatic refresh**
-
-</div>
-
-The dashboard is an actual web application—not a generated screenshot. It reads your public GitHub profile, repositories and activity through GitHub's public APIs and redraws the interface when new activity becomes visible.
-
-It watches for activity such as **commits, pull requests, issues, repository creation, forks, stars, reviews and releases**, then refreshes the relevant panels without rebuilding a dashboard image.
-
-> **Note:** GitHub's public Events API is designed for polling and GitHub documents that event visibility can have variable latency. The dashboard therefore reports its synchronization state honestly rather than claiming instantaneous delivery. citeturn302259search0turn302259search1
+> The dashboard is rendered from current GitHub data and refreshed automatically. New commits, pull requests, issues, repositories, stars, forks, reviews and releases can trigger a fresh render.
 
 ---
 
@@ -84,7 +76,7 @@ It watches for activity such as **commits, pull requests, issues, repository cre
 | 🏗️ **Data Engineering** | Structured data, pipelines and scalable system thinking |
 | 🧠 **DSA / Systems** | Algorithms, optimization and implementation fundamentals |
 | ⚙️ **Automation** | GitHub Actions, repeatable workflows and developer tooling |
-| 🌐 **Creator Work** | `xen_hub` — futuristic technology and AI content |
+| 🌐 **Creator Work** | `xen_hub` — futuristic technology and AI |
 
 ---
 
@@ -121,6 +113,6 @@ SHIP       → turn experiments into usable software
 
 ### `BUILD → EXPERIMENT → LEARN → SHIP`
 
-<sub>The live command center is deployed separately through GitHub Pages.</sub>
+<sub>Live dashboard embedded directly in the profile.</sub>
 
 </div>
