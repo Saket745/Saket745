@@ -1,24 +1,29 @@
 const USER = "Saket745";
 const API = "https://api.github.com";
-const POLL_MS = 60000;
-const eventsUrl = `${API}/users/${USER}/events/public?per_page=100`;
-const reposUrl = `${API}/users/${USER}/repos?per_page=100&type=owner&sort=updated`;
+const EVENT_POLL_MS = 60000;
+const DATA_REFRESH_MS = 300000;
+
 const profileUrl = `${API}/users/${USER}`;
+const reposUrl = `${API}/users/${USER}/repos?per_page=100&type=owner&sort=updated`;
+const eventsUrl = `${API}/users/${USER}/events/public?per_page=100`;
+const prSearchUrl = `${API}/search/issues?q=author%3A${USER}+is%3Apr&per_page=1`;
+const issueSearchUrl = `${API}/search/issues?q=author%3A${USER}+is%3Aissue&per_page=1`;
+
 const stack = [
   ["Py", "Python", "AI / Automation"], ["C+", "C++", "DSA / Systems"],
   ["JS", "JavaScript", "Web / Apps"], ["TS", "TypeScript", "Web / Apps"],
   ["PT", "PyTorch", "Deep Learning"], ["CV", "OpenCV", "Computer Vision"],
-  ["Fa", "FastAPI", "Backend"], ["GI", "GitHub Actions", "Automation"]
+  ["Fa", "FastAPI", "Backend"], ["GA", "GitHub Actions", "Automation"]
 ];
 
 const $ = (id) => document.getElementById(id);
 const fmt = (n) => Intl.NumberFormat("en-US", { notation: n > 9999 ? "compact" : "standard", maximumFractionDigits: 1 }).format(n ?? 0);
 const ago = (iso) => {
-  const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
-  if (s < 60) return `${Math.floor(s)}s ago`;
-  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
-  return `${Math.floor(s / 86400)}d ago`;
+  const seconds = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+  if (seconds < 60) return `${Math.floor(seconds)}s ago`;
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+  return `${Math.floor(seconds / 86400)}d ago`;
 };
 const esc = (s) => String(s ?? "").replace(/[&<>\"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 
@@ -26,6 +31,7 @@ function setState(kind, text) {
   const dot = $("liveDot");
   dot.className = `dot ${kind === "ok" ? "" : kind === "sync" ? "sync" : "off"}`;
   $("statusText").textContent = text;
+  $("statusText").classList.toggle("error", kind === "error");
 }
 
 function renderStack() {
@@ -40,29 +46,45 @@ async function getJson(url) {
   return r.json();
 }
 
-async function syncProfile() {
+async function loadCore() {
+  const [profile, repos, prs, issues] = await Promise.all([
+    getJson(profileUrl),
+    getJson(reposUrl),
+    getJson(prSearchUrl),
+    getJson(issueSearchUrl)
+  ]);
+  renderProfile(profile, repos, prs.total_count, issues.total_count);
+  renderLanguages(repos);
+  renderRepos(repos);
+}
+
+async function loadEvents() {
+  const events = await getJson(eventsUrl);
+  renderEvents(events);
+  return events;
+}
+
+async function syncAll() {
   setState("sync", "Synchronizing with GitHub…");
   try {
-    const [profile, repos, events] = await Promise.all([getJson(profileUrl), getJson(reposUrl), getJson(eventsUrl)]);
-    renderProfile(profile, repos);
-    renderLanguages(repos);
-    renderRepos(repos);
-    renderEvents(events);
+    const events = await loadEvents();
+    await loadCore();
+    estimateEventStats(events);
     $("lastSync").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-    setState("ok", `LIVE · polling every ${POLL_MS / 1000}s`);
+    setState("ok", `LIVE · event stream checked every ${EVENT_POLL_MS / 1000}s`);
   } catch (err) {
     console.error(err);
-    setState("off", "GitHub API unavailable — retrying");
-    $("statusText").classList.add("error");
-    $("statusText").textContent = `Sync error: ${err.message}`;
+    setState("error", "GitHub API unavailable — retrying");
   }
 }
 
-function renderProfile(profile, repos) {
+function renderProfile(profile, repos, prCount, issueCount) {
   $("repoCount").textContent = fmt(profile.public_repos);
   $("followers").textContent = fmt(profile.followers);
   $("stars").textContent = fmt(repos.reduce((n, r) => n + (r.stargazers_count || 0), 0));
   $("forks").textContent = fmt(repos.reduce((n, r) => n + (r.forks_count || 0), 0));
+  $("prs").textContent = fmt(prCount);
+  $("issues").textContent = fmt(issueCount);
 }
 
 function renderLanguages(repos) {
@@ -77,7 +99,6 @@ function renderLanguages(repos) {
     const pct = total ? (value / total) * 100 : 0;
     return `<div class="bar-row"><div class="bar-label">${esc(name)}</div><div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(1)}%"></div></div><div class="bar-pct">${pct.toFixed(1)}%</div></div>`;
   }).join("") : `<div class="empty">No public repository language data yet.</div>`;
-  $("languageSource").textContent = "LIVE";
 }
 
 function renderRepos(repos) {
@@ -91,7 +112,7 @@ function renderRepos(repos) {
 }
 
 function renderEvents(events) {
-  const relevant = events.filter(e => ["PushEvent", "PullRequestEvent", "IssuesEvent", "CreateEvent", "ForkEvent", "WatchEvent", "PullRequestReviewEvent", "ReleaseEvent"].includes(e.type)).slice(0, 14);
+  const relevant = events.filter(e => ["PushEvent", "PullRequestEvent", "IssuesEvent", "CreateEvent", "ForkEvent", "WatchEvent", "PullRequestReviewEvent", "ReleaseEvent"].includes(e.type)).slice(0, 16);
   const labels = {
     PushEvent: e => `Pushed code to <strong>${esc(e.repo.name.split("/").pop())}</strong>`,
     PullRequestEvent: e => `${esc(e.payload.action)} pull request in <strong>${esc(e.repo.name.split("/").pop())}</strong>`,
@@ -105,24 +126,24 @@ function renderEvents(events) {
   $("activity").innerHTML = relevant.length ? relevant.map(e => `<div class="event"><span class="event-dot"></span><div class="event-main"><div class="event-title">${labels[e.type]?.(e) || esc(e.type)}</div><div class="event-meta">${esc(e.repo.name)} · ${esc(e.type.replace("Event", ""))}</div></div><span class="event-time">${ago(e.created_at)}</span></div>`).join("") : `<div class="empty">No recent public events available.</div>`;
 }
 
-function estimateIssueAndPrStats(events) {
+function estimateEventStats(events) {
   const pr = events.filter(e => e.type === "PullRequestEvent").length;
   const issues = events.filter(e => e.type === "IssuesEvent").length;
-  $("prs").textContent = fmt(pr);
-  $("issues").textContent = fmt(issues);
+  $("prs").title = `${$("prs").textContent} total authored PRs; ${pr} recent public PR events visible in the event stream`;
+  $("issues").title = `${$("issues").textContent} total authored issues; ${issues} recent public issue events visible in the event stream`;
 }
 
-async function sync() {
-  try {
-    const events = await getJson(eventsUrl);
-    estimateIssueAndPrStats(events);
-    renderEvents(events);
-    $("lastSync").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-  } catch (e) { console.warn("Event refresh failed", e); }
-}
-
-$("refreshBtn").addEventListener("click", syncProfile);
+$("refreshBtn").addEventListener("click", syncAll);
 renderStack();
-syncProfile();
-setInterval(sync, POLL_MS);
-setInterval(syncProfile, POLL_MS * 5);
+syncAll();
+setInterval(async () => {
+  try {
+    const events = await loadEvents();
+    estimateEventStats(events);
+    $("lastSync").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    setState("ok", `LIVE · event stream checked every ${EVENT_POLL_MS / 1000}s`);
+  } catch (e) {
+    setState("error", "Event stream temporarily unavailable — retrying");
+  }
+}, EVENT_POLL_MS);
+setInterval(syncAll, DATA_REFRESH_MS);
