@@ -17,27 +17,27 @@
  <circle cx="8" cy="3" r="5.5" fill="#48c5ff" filter="url(#glow)"/>
  <text x="24" y="8" fill="#eef5ff" font-family="Segoe UI,Arial" font-size="13.5" font-weight="600">Jupyter Notebook</text>
  <rect x="154" y="-6" width="320" height="9" rx="4.5" fill="#16243a" stroke="#5c78a4" stroke-opacity=".22"/>
- <rect x="154" y="-6" width="116.2" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
- <text x="518" y="8" text-anchor="end" fill="#cfddf2" font-family="Segoe UI,Arial" font-size="12.5">36.3%</text></g><g transform="translate(34,140)">
+ <rect x="154" y="-6" width="115.9" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
+ <text x="518" y="8" text-anchor="end" fill="#cfddf2" font-family="Segoe UI,Arial" font-size="12.5">36.2%</text></g><g transform="translate(34,140)">
  <circle cx="8" cy="3" r="5.5" fill="#a875ff" filter="url(#glow)"/>
  <text x="24" y="8" fill="#eef5ff" font-family="Segoe UI,Arial" font-size="13.5" font-weight="600">Python</text>
  <rect x="154" y="-6" width="320" height="9" rx="4.5" fill="#16243a" stroke="#5c78a4" stroke-opacity=".22"/>
- <rect x="154" y="-6" width="104.8" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
- <text x="518" y="8" text-anchor="end" fill="#cfddf2" font-family="Segoe UI,Arial" font-size="12.5">32.8%</text></g><g transform="translate(34,178)">
+ <rect x="154" y="-6" width="105.3" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
+ <text x="518" y="8" text-anchor="end" fill="#cfddf2" font-family="Segoe UI,Arial" font-size="12.5">32.9%</text></g><g transform="translate(34,178)">
  <circle cx="8" cy="3" r="5.5" fill="#42dfcf" filter="url(#glow)"/>
  <text x="24" y="8" fill="#eef5ff" font-family="Segoe UI,Arial" font-size="13.5" font-weight="600">HTML</text>
  <rect x="154" y="-6" width="320" height="9" rx="4.5" fill="#16243a" stroke="#5c78a4" stroke-opacity=".22"/>
- <rect x="154" y="-6" width="43.6" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
+ <rect x="154" y="-6" width="43.5" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
  <text x="518" y="8" text-anchor="end" fill="#cfddf2" font-family="Segoe UI,Arial" font-size="12.5">13.6%</text></g><g transform="translate(34,216)">
  <circle cx="8" cy="3" r="5.5" fill="#ffc15b" filter="url(#glow)"/>
  <text x="24" y="8" fill="#eef5ff" font-family="Segoe UI,Arial" font-size="13.5" font-weight="600">TypeScript</text>
  <rect x="154" y="-6" width="320" height="9" rx="4.5" fill="#16243a" stroke="#5c78a4" stroke-opacity=".22"/>
- <rect x="154" y="-6" width="29.1" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
+ <rect x="154" y="-6" width="29.0" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
  <text x="518" y="8" text-anchor="end" fill="#cfddf2" font-family="Segoe UI,Arial" font-size="12.5">9.1%</text></g><g transform="translate(34,254)">
  <circle cx="8" cy="3" r="5.5" fill="#ff6fae" filter="url(#glow)"/>
  <text x="24" y="8" fill="#eef5ff" font-family="Segoe UI,Arial" font-size="13.5" font-weight="600">JavaScript</text>
  <rect x="154" y="-6" width="320" height="9" rx="4.5" fill="#16243a" stroke="#5c78a4" stroke-opacity=".22"/>
- <rect x="154" y="-6" width="23.2" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
+ <rect x="154" y="-6" width="23.1" height="9" rx="4.5" fill="url(#accent)" opacity=".92"/>
  <text x="518" y="8" text-anchor="end" fill="#cfddf2" font-family="Segoe UI,Arial" font-size="12.5">7.2%</text></g><g transform="translate(34,292)">
  <circle cx="8" cy="3" r="5.5" fill="#77a7ff" filter="url(#glow)"/>
  <text x="24" y="8" fill="#eef5ff" font-family="Segoe UI,Arial" font-size="13.5" font-weight="600">CSS</text>
