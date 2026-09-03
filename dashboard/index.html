@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080d18" />
+  <meta name="description" content="Saket Maurya — live GitHub engineering dashboard." />
+  <title>SAKET MAURYA · GitHub Live Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <main class="shell">
+    <header class="hero glass">
+      <div>
+        <div class="eyebrow"><span id="liveDot" class="dot"></span> GITHUB LIVE TELEMETRY</div>
+        <h1>SAKET MAURYA</h1>
+        <p class="subtitle"><span class="mono">@Saket745</span> · Data Engineering × AI/ML × Computer Vision</p>
+        <p class="lede">A live engineering surface powered by GitHub's public APIs. Activity, repositories, language signals and contribution events update without rebuilding a dashboard image.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button" href="https://github.com/Saket745" target="_blank" rel="noreferrer">VIEW GITHUB ↗</a>
+        <button class="button ghost" id="refreshBtn">SYNC NOW</button>
+      </div>
+      <div class="sync-line">
+        <span id="statusText">Connecting…</span>
+        <span>•</span>
+        <span>last sync <strong id="lastSync">—</strong></span>
+      </div>
+    </header>
+
+    <section class="stat-grid">
+      <article class="stat glass"><span>PUBLIC REPOS</span><strong id="repoCount">—</strong><small>owner repositories</small></article>
+      <article class="stat glass"><span>FOLLOWERS</span><strong id="followers">—</strong><small>GitHub network</small></article>
+      <article class="stat glass"><span>STARS</span><strong id="stars">—</strong><small>across public repos</small></article>
+      <article class="stat glass"><span>FORKS</span><strong id="forks">—</strong><small>across public repos</small></article>
+      <article class="stat glass"><span>PUBLIC PRs</span><strong id="prs">—</strong><small>authored by Saket745</small></article>
+      <article class="stat glass"><span>PUBLIC ISSUES</span><strong id="issues">—</strong><small>authored by Saket745</small></article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="panel glass languages-panel">
+        <div class="panel-head"><div><span class="eyebrow">CODE SIGNAL</span><h2>Top Languages</h2></div><span class="chip" id="languageSource">LIVE</span></div>
+        <div id="languageBars" class="bars"><div class="empty">Loading language composition…</div></div>
+      </article>
+
+      <article class="panel glass stack-panel">
+        <div class="panel-head"><div><span class="eyebrow">BUILDER TOOLKIT</span><h2>Tech Stack</h2></div><span class="chip">CURATED</span></div>
+        <div id="stackGrid" class="stack-grid"></div>
+      </article>
+    </section>
+
+    <section class="panel glass activity-panel">
+      <div class="panel-head"><div><span class="eyebrow">EVENT STREAM</span><h2>Live GitHub Activity</h2></div><span class="chip pulse-chip">WATCHING</span></div>
+      <div id="activity" class="activity"><div class="empty">Waiting for GitHub events…</div></div>
+    </section>
+
+    <section class="dashboard-grid lower-grid">
+      <article class="panel glass repos-panel">
+        <div class="panel-head"><div><span class="eyebrow">REPOSITORY RADAR</span><h2>Latest Repositories</h2></div><span class="chip" id="repoUpdated">—</span></div>
+        <div id="repos" class="repo-list"></div>
+      </article>
+
+      <article class="panel glass snake-panel">
+        <div class="panel-head"><div><span class="eyebrow">CONTRIBUTION PATH</span><h2>GitHub Contribution Grid</h2></div><span class="chip">GITHUB</span></div>
+        <div class="snake-wrap">
+          <img src="https://ghchart.rshah.org/48c5ff/Saket745" alt="Saket745 GitHub contribution chart" loading="lazy" />
+        </div>
+        <p class="hint">The chart above is an external rendering of your public GitHub contribution calendar; the rest of this dashboard is rendered by this app itself.</p>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>SAKET745 / GITHUB LIVE DASHBOARD</span>
+      <span>Public API · client-side rendering · no private token in browser</span>
+    </footer>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
