@@ -4,20 +4,23 @@
 
 ### `Saket745` · Data Engineering × AI/ML × Computer Vision
 
-<a href="https://github.com/Saket745">
-  <img src="https://img.shields.io/badge/GitHub-Saket745-0b1220?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
-</a>
-<a href="https://www.linkedin.com/in/saket-maurya-de/">
-  <img src="https://img.shields.io/badge/LinkedIn-Saket%20Maurya-0b1220?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-</a>
-<a href="https://instagram.com/xen_hub">
-  <img src="https://img.shields.io/badge/Creator-xen__hub-0b1220?style=for-the-badge&logo=instagram&logoColor=white" alt="xen_hub"/>
-</a>
+<p>
+  <a href="https://github.com/Saket745">
+    <img src="https://img.shields.io/badge/GitHub-Saket745-0b1220?style=for-the-badge&logo=github&logoColor=ffffff" alt="GitHub"/>
+  </a>
+  <a href="https://www.linkedin.com/in/saket-maurya-de/">
+    <img src="https://img.shields.io/badge/LinkedIn-Saket%20Maurya-0b1220?style=for-the-badge&logo=linkedin&logoColor=ffffff" alt="LinkedIn"/>
+  </a>
+  <a href="https://instagram.com/xen_hub">
+    <img src="https://img.shields.io/badge/Creator-xen__hub-0b1220?style=for-the-badge&logo=instagram&logoColor=ffffff" alt="xen_hub"/>
+  </a>
+</p>
 
-<br/>
-<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&height=180&section=header&text=BUILD%20%7C%20EXPERIMENT%20%7C%20SHIP&fontSize=30&fontColor=ffffff&animation=fadeIn&color=0:0b1220,50:182b5a,100:4c1d95" alt="Build experiment ship"/>
 
 > **I build practical systems at the intersection of software, intelligence and experimentation.**
+>
+> Research the next useful trend → turn it into a working system → automate the repeatable parts → ship.
 
 </div>
 
@@ -29,26 +32,32 @@
 <tr>
 <td width="50%" valign="top">
 
-**🔭 Building**  
-Heart-rate detection using Computer Vision + PyTorch.
+### 🔭 Building
 
-**📚 Learning**  
-Digital Image Processing + DSA interview preparation.
+**Computer Vision + PyTorch** for heart-rate detection and practical vision pipelines.
+
+### 📚 Learning
+
+**Digital Image Processing + DSA** with a focus on stronger fundamentals and implementation skill.
 
 </td>
 <td width="50%" valign="top">
 
-**🚀 Creator**  
-`xen_hub` — futuristic technology & AI content.
+### 🚀 Creating
 
-**⚡ Operating principle**  
-Research the next useful trend, then turn it into something practical.
+`xen_hub` — futuristic technology, AI and builder-oriented content.
+
+### ⚡ Operating principle
+
+**Spot the next useful direction early, study it deeply, then build something tangible.**
 
 </td>
 </tr>
 </table>
 
-## ◈ GLASS DASHBOARD
+---
+
+## ◈ GLASSMORPHIC PROFILE DASHBOARD
 
 <p align="center">
   <img src="./assets/widgets/top-languages.svg" alt="Saket745 top languages" width="630" />
@@ -62,42 +71,60 @@ Research the next useful trend, then turn it into something practical.
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/widgets/github-snake-glass-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./assets/widgets/github-snake-glass.svg">
-    <img src="./assets/widgets/github-snake-glass.svg" alt="Saket745 contribution snake" width="900" />
+    <img src="./assets/widgets/github-snake-glass.svg" alt="Saket745 GitHub contribution snake" width="900" />
   </picture>
 </p>
 
-## ◈ WHAT I LIKE BUILDING
+> **Live widgets:** the language composition, contribution snake and glass visuals are refreshed automatically through GitHub Actions.
+
+---
+
+## ◈ ENGINEERING FOCUS
+
+| Domain | What I am exploring |
+| --- | --- |
+| 🤖 **AI / ML** | Applied intelligence, experimentation and model-driven products |
+| 👁️ **Computer Vision** | Image understanding, detection and vision pipelines |
+| 🏗️ **Data Engineering** | Structured data, pipelines and scalable system thinking |
+| 🧠 **DSA / Systems** | Algorithms, optimization and implementation fundamentals |
+| ⚙️ **Automation** | GitHub Actions, repeatable workflows and developer tooling |
+| 🌐 **Creator Work** | `xen_hub` — futuristic technology and AI content |
+
+---
+
+## ◈ BUILDER TOOLKIT
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=python,cpp,pytorch,opencv,react,fastapi,git,githubactions&perline=8" alt="Saket745 technology toolkit" />
+</p>
+
+---
+
+## ◈ PROJECT MINDSET
 
 ```text
-AI / ML            → practical intelligence, experimentation, model-driven products
-Computer Vision    → image understanding, detection, vision pipelines
-Data Engineering   → structured data, pipelines, systems thinking
-DSA / Systems      → fundamentals, performance, problem solving
-Automation         → GitHub workflows, repeatable developer tooling
+RESEARCH   → understand the trend and the real problem
+DESIGN     → reduce the idea to a useful system
+BUILD      → prototype fast, then engineer the core
+AUTOMATE   → remove repeatable manual work
+MEASURE    → learn from actual results
+SHIP       → turn experiments into usable software
 ```
 
-## ◈ PROJECT RADAR
-
-| Area | Direction |
-| --- | --- |
-| 🤖 AI / ML | Applied models and intelligent automation |
-| 👁️ Computer Vision | Vision-based detection and analysis |
-| 🧠 Algorithms | DSA, optimization and problem solving |
-| ⚙️ Engineering | Practical systems, developer tooling and workflows |
-| 🌐 Creator Work | `xen_hub` — futuristic tech & AI |
+---
 
 ## ◈ CONNECT
 
-<p align="center">
-  <a href="https://github.com/Saket745">GitHub</a> ·
-  <a href="https://www.linkedin.com/in/saket-maurya-de/">LinkedIn</a> ·
-  <a href="https://instagram.com/xen_hub">xen_hub</a>
-</p>
-
 <div align="center">
+
+<a href="https://github.com/Saket745">GitHub</a> ·
+<a href="https://www.linkedin.com/in/saket-maurya-de/">LinkedIn</a> ·
+<a href="https://instagram.com/xen_hub">xen_hub</a>
+
+<br/><br/>
 
 ### `BUILD → EXPERIMENT → LEARN → SHIP`
 
-<sub>Glass widgets refresh automatically through GitHub Actions.</sub>
+<sub>Profile widgets are generated from this repository and refreshed by GitHub Actions.</sub>
 
 </div>
