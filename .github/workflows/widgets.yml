@@ -3,7 +3,7 @@ name: Refresh Glass README Widgets
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 2 * * *"
+    - cron: "17 * * * *"
   push:
     branches: [main]
     paths-ignore:
@@ -42,7 +42,7 @@ jobs:
       - name: Wrap snake in matching glass panel
         run: python3 scripts/wrap_snake.py
 
-      - name: Publish refreshed widget assets
+      - name: Publish only when rendered data changed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -50,8 +50,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/widgets
           if git diff --cached --quiet; then
-            echo "No widget changes to publish."
+            echo "No rendered widget changes."
             exit 0
           fi
-          git commit -m "chore: refresh profile glass widgets"
+          git commit -m "chore: refresh profile telemetry widgets"
           git push origin HEAD:main
