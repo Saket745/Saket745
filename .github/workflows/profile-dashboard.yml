@@ -1,0 +1,46 @@
+name: Refresh Inline Profile Dashboard
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [github-event]
+  schedule:
+    - cron: "17 * * * *"
+  push:
+    branches: [main]
+    paths-ignore:
+      - "assets/widgets/profile-dashboard.svg"
+
+concurrency:
+  group: saket745-inline-dashboard
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Render current GitHub state
+        env:
+          PROFILE_USER: Saket745
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/generate_profile_dashboard.py
+
+      - name: Publish dashboard only when changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/widgets/profile-dashboard.svg
+          if git diff --cached --quiet; then
+            echo "No dashboard changes."
+            exit 0
+          fi
+          git commit -m "chore: refresh inline profile dashboard"
+          git push origin HEAD:main
