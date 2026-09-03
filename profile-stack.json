@@ -1,0 +1,10 @@
+[
+  {"name":"Python", "label":"AI / Automation"},
+  {"name":"C++", "label":"DSA / Systems"},
+  {"name":"React", "label":"Frontend"},
+  {"name":"FastAPI", "label":"Backend"},
+  {"name":"PyTorch", "label":"Deep Learning"},
+  {"name":"OpenCV", "label":"Computer Vision"},
+  {"name":"Git", "label":"Version Control"},
+  {"name":"GitHub Actions", "label":"Automation"}
+]
