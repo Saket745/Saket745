@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050a12"/><stop offset=".5" stop-color="#07101c"/><stop offset="1" stop-color="#130b20"/></linearGradient><linearGradient id="edge"><stop stop-color="#48c5ff"/><stop offset=".5" stop-color="#b982ff"/><stop offset="1" stop-color="#42dfcf"/></linearGradient></defs><rect x="2" y="2" width="896" height="296" rx="28" fill="url(#bg)" stroke="url(#edge)" stroke-width="1.4"/><text x="34" y="40" fill="#f5f9ff" font-family="Segoe UI,Arial" font-size="20" font-weight="700">GITHUB STREAK • CONTRIBUTION SNAKE</text><text x="34" y="61" fill="#91a7ca" font-family="Segoe UI,Arial" font-size="11">Saket745 • dark glass mode</text><rect x="28" y="78" width="844" height="194" rx="19" fill="#030811" fill-opacity=".70" stroke="#5e7297" stroke-opacity=".28"/><image href="github-snake-dark.svg" x="45" y="92" width="810" height="165" preserveAspectRatio="xMidYMid meet"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" role="img" aria-label="GITHUB STREAK • CONTRIBUTION SNAKE">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d1727"/><stop offset=".5" stop-color="#0a1220"/><stop offset="1" stop-color="#171027"/></linearGradient>
+ <linearGradient id="edge" x1="0" x2="1"><stop stop-color="#48c5ff"/><stop offset=".5" stop-color="#a875ff"/><stop offset="1" stop-color="#42dfcf"/></linearGradient>
+ <filter id="soft"><feGaussianBlur stdDeviation="20"/></filter>
+ <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#80bfff" stroke-opacity=".045"/></pattern>
+</defs>
+<rect x="2" y="2" width="896" height="296" rx="28" fill="url(#bg)" stroke="url(#edge)" stroke-width="1.4"/>
+<ellipse cx="95" cy="-5" rx="220" ry="110" fill="#287eff" opacity=".10" filter="url(#soft)"/>
+<ellipse cx="820" cy="315" rx="230" ry="130" fill="#9b55ff" opacity=".08" filter="url(#soft)"/>
+<rect x="3" y="3" width="894" height="294" rx="27" fill="url(#grid)"/>
+<text x="34" y="39" fill="#f5f9ff" font-family="Segoe UI,Arial" font-size="20" font-weight="700" letter-spacing=".8">GITHUB STREAK • CONTRIBUTION SNAKE</text>
+<text x="34" y="60" fill="#91a7ca" font-family="Segoe UI,Arial" font-size="11">Saket745 • contribution activity transformed into a neon path</text>
+<rect x="28" y="78" width="844" height="194" rx="19" fill="#07111f" fill-opacity=".62" stroke="#60799e" stroke-opacity=".28"/>
+<image href="github-snake-dark.svg" x="45" y="92" width="810" height="165" preserveAspectRatio="xMidYMid meet"/>
+</svg>
