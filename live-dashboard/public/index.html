@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#080d18" />
+  <title>Saket745 — Live GitHub Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="hero glass">
+      <div class="profile">
+        <img id="avatar" src="https://github.com/Saket745.png" alt="Saket Maurya" />
+        <div>
+          <div class="eyebrow">GITHUB LIVE TELEMETRY</div>
+          <h1>SAKET MAURYA</h1>
+          <p><span class="mono">@Saket745</span> · Data Engineering × AI/ML × Computer Vision</p>
+        </div>
+      </div>
+      <div class="live-pill"><span id="liveDot"></span><span id="liveText">CONNECTING</span></div>
+    </header>
+
+    <section class="stats-grid" id="statsGrid"></section>
+
+    <section class="two-col">
+      <article class="panel glass">
+        <div class="panel-head"><div><span class="kicker">CODE PROFILE</span><h2>Top Languages</h2></div></div>
+        <div id="languages" class="languages"></div>
+      </article>
+      <article class="panel glass">
+        <div class="panel-head"><div><span class="kicker">REPOSITORY RADAR</span><h2>Projects</h2></div></div>
+        <div id="repos" class="repos"></div>
+      </article>
+    </section>
+
+    <section class="panel glass">
+      <div class="panel-head"><div><span class="kicker">LIVE EVENT STREAM</span><h2>Activity</h2></div><span id="syncTime" class="muted">—</span></div>
+      <div id="activity" class="activity"></div>
+    </section>
+
+    <footer><span>Saket745 Live Dashboard</span><span>Webhook → API → WebSocket → Glass UI</span></footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
