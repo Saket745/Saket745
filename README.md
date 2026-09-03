@@ -60,6 +60,17 @@
 ## ◈ GLASSMORPHIC PROFILE DASHBOARD
 
 <p align="center">
+  <a href="https://Saket745.github.io/Saket745/">
+    <img src="https://capsule-render.vercel.app/api?type=rect&height=90&text=OPEN%20LIVE%20GITHUB%20DASHBOARD%20↗&fontSize=25&fontColor=ffffff&color=0:0b1220,45:182b5a,100:4c1d95&stroke=48c5ff&strokeWidth=1" alt="Open live GitHub dashboard"/>
+  </a>
+</p>
+
+<p align="center">
+  <strong>Interactive • event-driven • auto-refreshing</strong><br/>
+  <sub>Commits, pull requests, issues, repositories, stars, forks, languages and activity are rendered dynamically from GitHub's public APIs.</sub>
+</p>
+
+<p align="center">
   <img src="./assets/widgets/top-languages.svg" alt="Saket745 top languages" width="630" />
 </p>
 
@@ -75,7 +86,7 @@
   </picture>
 </p>
 
-> **Live widgets:** the language composition, contribution snake and glass visuals are refreshed automatically through GitHub Actions.
+> **Live dashboard:** open the interactive dashboard above for continuously refreshed GitHub activity. The decorative images below remain as the profile's visual showcase.
 
 ---
 
