@@ -1,0 +1,104 @@
+name: Profile Intelligence
+
+# Event-driven, GitHub-native pipeline. No server, no hosting, no separate
+# app: this workflow is the entire system. See docs/PROFILE_INTELLIGENCE.md
+# for the architecture and the security model.
+#
+# Trigger layers:
+#   schedule            - the comprehensive fallback. Polls the public events
+#                          feed for Saket745 every ~10 minutes (GitHub's
+#                          events API itself has 30s-6h latency, so this is
+#                          "eventually consistent", not instant).
+#   repository_dispatch - the instant path. Any repo that adopts
+#                          templates/notify-profile.yml pings this workflow
+#                          directly within seconds of a real event, with no
+#                          server in between.
+#   workflow_dispatch   - manual "refresh now" button, always forces a full
+#                          recalculation.
+#   push                - keep the dashboard in sync with intentional edits
+#                          to this repo itself (e.g. profile-stack.json).
+on:
+  schedule:
+    - cron: "7,17,27,37,47,57 * * * *" # every 10 min, offset off the top of the hour
+  workflow_dispatch:
+  repository_dispatch:
+    types: [activity-ping]
+  push:
+    branches: [main]
+    paths-ignore:
+      - "assets/widgets/profile-dashboard.svg"
+      - "data/stats.json"
+      - ".state/**"
+
+concurrency:
+  group: profile-intelligence
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Determine credential mode
+        id: creds
+        env:
+          APP_ID: ${{ secrets.PROFILE_APP_ID }}
+          APP_KEY: ${{ secrets.PROFILE_APP_PRIVATE_KEY }}
+        run: |
+          if [ -n "$APP_ID" ] && [ -n "$APP_KEY" ]; then
+            echo "mode=app" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=default" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Optional, most-secure path: mint a short-lived (1h) installation
+      # token from a GitHub App instead of using a long-lived PAT. Only
+      # runs if PROFILE_APP_ID / PROFILE_APP_PRIVATE_KEY secrets exist.
+      # See docs/PROFILE_INTELLIGENCE.md for setup.
+      - name: Mint short-lived App installation token
+        if: steps.creds.outputs.mode == 'app'
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.PROFILE_APP_ID }}
+          private-key: ${{ secrets.PROFILE_APP_PRIVATE_KEY }}
+
+      - name: Detect activity & recalculate statistics
+        id: collect
+        env:
+          PROFILE_USER: Saket745
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APP_INSTALLATION_TOKEN: ${{ steps.app-token.outputs.token }}
+          STATS_PAT: ${{ secrets.STATS_PAT }}
+          HEARTBEAT_HOURS: "6"
+        run: python3 scripts/collect_stats.py
+
+      - name: Render dashboard
+        if: steps.collect.outputs.changed == 'true'
+        run: python3 scripts/render_dashboard.py
+
+      - name: Publish updated dashboard
+        if: steps.collect.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/widgets/profile-dashboard.svg data/stats.json .state/
+          if git diff --cached --quiet; then
+            echo "No visible changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh profile intelligence dashboard (${{ steps.collect.outputs.reason }})"
+          git push origin HEAD:main

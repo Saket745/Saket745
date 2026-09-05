@@ -1,0 +1,50 @@
+# Copy this file into any other repo as .github/workflows/notify-profile.yml
+# to get near-instant dashboard refreshes from that repo, instead of waiting
+# for the ~10-minute poll in Saket745/Saket745.
+#
+# This bypasses GitHub's Events API entirely (which has its own 30s-6h
+# internal latency — see docs/PROFILE_INTELLIGENCE.md) by having THIS repo's
+# Action call the profile repo's Action directly.
+#
+# One-time setup (per repo you add this to):
+#   1. Create a fine-grained personal access token scoped to ONLY
+#      Saket745/Saket745, with "Contents: Read and write" permission
+#      (that's the permission the /dispatches endpoint requires).
+#      Give it an expiry — 90 days is reasonable — and put a calendar
+#      reminder to rotate it.
+#   2. Add it as a secret named PROFILE_DISPATCH_TOKEN in this repo
+#      (Settings -> Secrets and variables -> Actions).
+#      To set the same secret across every repo in one command instead of
+#      clicking through each repo's settings:
+#        gh secret set PROFILE_DISPATCH_TOKEN --body "<token>" \
+#          --repos Saket745/repo-a,Saket745/repo-b,Saket745/repo-c
+#
+# Nothing here runs a server or a long-lived process — it's one Action
+# calling another Action's REST endpoint, entirely inside GitHub.
+
+name: Notify Profile Dashboard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, closed]
+  issues:
+    types: [opened, closed]
+  release:
+    types: [published]
+  watch:
+    types: [started] # fires when someone stars this repo
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch activity ping to profile repo
+        env:
+          GH_TOKEN: ${{ secrets.PROFILE_DISPATCH_TOKEN }}
+        run: |
+          gh api repos/Saket745/Saket745/dispatches \
+            -f event_type=activity-ping \
+            -f "client_payload[repo]=${{ github.repository }}" \
+            -f "client_payload[event]=${{ github.event_name }}"
