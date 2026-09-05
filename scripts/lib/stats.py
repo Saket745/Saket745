@@ -113,6 +113,9 @@ def summarize_event(item: dict) -> dict:
     elif label == "Create":
         ref_type = payload.get("ref_type", "")
         label = f"Created {ref_type}".strip()
+    elif label == "Delete":
+        ref_type = payload.get("ref_type", "")
+        label = f"Deleted {ref_type}".strip()
     elif action:
         label = f"{label} \u2022 {action}"
     return {

@@ -207,7 +207,11 @@ def main() -> None:
             "total_stars": sum(int(r.get("stargazers_count", 0)) for r in repos),
             "total_forks": sum(int(r.get("forks_count", 0)) for r in repos),
             "count": len(repos),
-            "most_starred": max(repos, key=lambda r: r.get("stargazers_count", 0))["name"] if repos else None,
+            "most_starred": (
+                max(repos, key=lambda r: r.get("stargazers_count", 0))["name"]
+                if repos and max(r.get("stargazers_count", 0) for r in repos) > 0
+                else None
+            ),
         },
         "languages": languages,
         "contributions": {
