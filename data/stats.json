@@ -14,7 +14,7 @@
     },
     "years_counted": 3
   },
-  "generated_at": "2026-09-11T15:05:36.028975+00:00",
+  "generated_at": "2026-09-11T23:11:23.473782+00:00",
   "languages": [
     {
       "bytes": 1458263,
@@ -105,7 +105,7 @@
   },
   "trigger": {
     "event": "schedule",
-    "reason": "new-activity",
+    "reason": "heartbeat",
     "token_source": "default-actions-token"
   }
 }
